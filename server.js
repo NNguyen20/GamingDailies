@@ -3,7 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var server = require('dotenv').config();
+
+require('dotenv').config();
+
+require('./config/database');
+
+// Run the passport configuration code
+require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
