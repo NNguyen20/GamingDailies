@@ -11,7 +11,7 @@ const reviewSchema = new Schema({
   timestamps: true
 });
 
-const movieSchema = new Schema({
+const gameSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -33,4 +33,4 @@ const movieSchema = new Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Movie', movieSchema);
+module.exports = mongoose.model('game', gameSchema);

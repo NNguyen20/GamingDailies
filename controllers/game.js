@@ -1,46 +1,45 @@
-const Game = require('../models/Game');
-const Daily = require('../models/Daily');
+const Daily = require('../models/gaily');
+const Game = require('../models/game');
 
 module.exports = {
-  index,
-  show,
-  new: newGame,
-  create
+  new: newDaily,
+  create,
+  addToCast
 };
 
-function index(req, res) {
-  Game.find({}, function(err, Games) {
-    res.render('Games/index', { title: 'All Games', Games });
+function addToCast(req, res) {
+  // Obtain the Game
+  Game.findById(req.params.GameId, function(err, Game) {
+    // Push the _id of the Daily into the Game's cast array
+    Game.cast.push(req.body.DailyId);
+    // Save the Game
+    Game.save(function(err) {
+      // Redirect back to the Game show route
+      res.redirect(`/games/${Game._id}`);
+    });
   });
 }
 
-function show(req, res) {
-  Game.findById(req.params.id)
-    .populate('cast')
-    .exec(function(err, Game) {
-      // Native MongoDB syntax
-      Daily
-        .find({_id: {$nin: Game.cast}})
-        .sort('name').exec(function(err, Dailys) {
-          res.render('Games/show', { title: 'Game Detail', Game, Dailys });
-        });
-    });
-}
-
-function newGame(req, res) {
-  res.render('Games/new', { title: 'Add Game' });
-}
-
 function create(req, res) {
-  // convert nowShowing's checkbox of nothing or "on" to boolean
-  req.body.nowShowing = !!req.body.nowShowing;
-  // ensure empty inputs are removed so that model's default values will work
-  for (let key in req.body) {
-    if (req.body[key] === '') delete req.body[key];
-  }
-  const Game = new Game(req.body);
-  Game.save(function(err) {
-    if (err) return res.redirect('/Games/new');
-    res.redirect(`/Games/${Game._id}`);
+  // Need to "fix" date formatting to prevent day off by 1
+  // This is due to the <input type="date"> returning the date
+  // string in this format:  "YYYY-MM-DD"
+  // https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
+  const s = req.body.born;
+  req.body.born = `${s.substr(5, 2)}-${s.substr(8, 2)}-${s.substr(0, 4)}`;
+  Daily.create(req.body, function (err, Daily) {
+    res.redirect('/Dailys/new');
+  });
+}
+
+function newDaily(req, res) {
+  Daily
+    .find({})
+    .sort('name')
+    .exec(function (err, Dailys) {
+      res.render('daily/new', {
+        title: 'Add daily',
+        Dailys
+      });
   });
 }
