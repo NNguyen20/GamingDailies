@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 router.get('/', function(req, res, next) {
-  res.redirect('/movies');
+  res.redirect('/game');
 });
 
 // Login with Google
@@ -15,15 +15,15 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect: '/movies',
-    failureMessage: '/movies'
+    successRedirect: '/game',
+    failureMessage: '/game'
   }
 ));
 
 // Logout
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/movies');
+  res.redirect('/game');
 });
 
 module.exports = router;

@@ -38,6 +38,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.session());
+// Add this middleware function that ensures
+// that a user property is available in all views
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
+app.use('/', indexRouter);
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
