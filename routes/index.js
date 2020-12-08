@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
 const passport = require('passport');
+var router = express.Router();
 
+/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.redirect('/game');
+  res.render('index', { title: 'The Daily Gamer' });
 });
 
-// Login with Google
 router.get('/auth/google', passport.authenticate(
   'google',
   { scope: ['profile', 'email'] }
@@ -15,15 +15,14 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    successRedirect: '/game',
-    failureMessage: '/game'
+    successRedirect: '/',
+    failureMessage: '/'
   }
 ));
 
-// Logout
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/game');
-});
+  res.redirect('/');
+})
 
 module.exports = router;

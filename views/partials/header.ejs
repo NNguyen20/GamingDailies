@@ -1,10 +1,18 @@
-<%- include('../partials/header') %>
+<!DOCTYPE html>
 <html>
-
-<head>
-  <nav><a href="/">HOME</a><a href="/">Genshin</a><a href="/">Warcraft</a></nav>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-
-  
-<%- include('../partials/footer') %>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+      <nav>
+        <a href="/">&nbsp;HOME&nbsp;</a>
+        <% if(user) { %>
+        <a href="//new">&nbsp;</a>
+        <a href="/logout">LOG OUT</a>
+       <% } else { %> 
+        <a href="/auth/google" class="login">LOG IN&nbsp;</a>
+       <% } %> 
+      </nav>
+      <main>

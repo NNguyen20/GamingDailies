@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= The Daily Gamer %></title>
+    <%- include('./partials/header') %>
+    <title><%= %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>Games</h1>
-    <header>
-      <nav>
-          <a href="/logout"><i class="logout"</i>Log Out</a>
-          <a href="/auth/google"><i class="login"></i>Login with Google</a>
-      </nav>
-      </header>
-      <div></div>
+  <body>
+    
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
   </body>
+  <%- include('./partials/footer') %>
 </html>
