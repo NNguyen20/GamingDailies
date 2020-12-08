@@ -2,7 +2,11 @@ var express = require('express');
 const passport = require('passport');
 var router = express.Router();
 
+router.get('/', gameCtrl.index);
 /* GET home page. */
+
+
+
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'The Daily Gamer' });
 });
