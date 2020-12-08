@@ -1,10 +1,10 @@
 const game = require('../models/game');
-const daily = require('../models/performer');
+const daily = require('../models/daily');
 
 module.exports = {
   index,
   show,
-  new: newgame,
+  new: newDaily,
   create
 };
 
@@ -14,20 +14,7 @@ function index(req, res) {
   });
 }
 
-function show(req, res) {
-  game.findById(req.params.id)
-    .populate('cast')
-    .exec(function(err, game) {
-      // Native MongoDB syntax
-      daily
-        .find({_id: {$nin: game.cast}})
-        .sort('name').exec(function(err, dailys) {
-          res.render('games/show', { title: 'game Detail', game, dailys });
-        });
-    });
-}
-
-function newgame(req, res) {
+function newDaily(req, res) {
   res.render('games/new', { title: 'Add game' });
 }
 

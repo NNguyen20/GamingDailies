@@ -1,10 +1,10 @@
-const Daily = require('../models/gaily');
+const Daily = require('../models/daily');
 const Game = require('../models/game');
 
 module.exports = {
   new: newDaily,
-  create,
-  addToCast
+  createDaily,
+  
 };
 
 function addToCast(req, res) {
@@ -20,7 +20,7 @@ function addToCast(req, res) {
   });
 }
 
-function create(req, res) {
+function createDaily(req, res) {
   // Need to "fix" date formatting to prevent day off by 1
   // This is due to the <input type="date"> returning the date
   // string in this format:  "YYYY-MM-DD"

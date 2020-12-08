@@ -47,7 +47,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', indexRouter);
-
+app.use('/game', gameRouter)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
