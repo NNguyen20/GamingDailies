@@ -1,7 +1,6 @@
-var Todo = require('../models/todos');
+var Todo = require('../models/games');
 
 module.exports = {
-  index,
   show,
   new: newTodo,
   create,
@@ -9,12 +8,6 @@ module.exports = {
   edit,
   update
 };
-
-function index(req, res) {
-  Todo.find({}, function(err, todo) {
-    res.render('todos/index', {todo, title: 'todos'})
-});
-}
 
 function show(req, res) {
   Todo.find({}, function(err, todos){
