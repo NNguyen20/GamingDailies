@@ -25,3 +25,12 @@ img {
 li {
   list-style: none;
 }
+
+#div-container {
+  display: grid;
+}
+
+#genshin {
+  font-size: 20px;
+
+}
