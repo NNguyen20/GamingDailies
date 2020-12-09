@@ -23,6 +23,7 @@ function create(req, res) {
   for (let key in req.body) {
       if (req.body[key] === '') delete req.body[key];
   }
+  
   const todo = new Todo(req.body);
   todo.save(function(err) {
       if (err) return res.redirect('/todos/new');

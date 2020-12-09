@@ -1,16 +1,36 @@
 <%- include('../partials/header') %>
-<body>
-  <h1>Dailies to date</h1>
 
-  <div class="flex-container">
-    <div>Genshin Impact</div>
-    <div>World Of Warcraft</div>
-    <div>League of legends</div>
- </div> 
-
-</tbody>
-</body>
-
+<ul>
+  <% games.forEach(function(t) { %>
+    <li>
+      <form action="/games/<%= t.id %>?_method=DELETE"
+        class="delete-form" method="POST">
+        <button type="submit">X</button>
+      </form>
+      <a href="/games/<%= t.id %>"><%= t.games %></a>
+        - 
+      <%= t.done ? 'done' : 'not done' %>
+    </li>
+  <% }); %>
+</ul>
+<a href="/todo">Add To-Do</a>
 
 
 <%- include('../partials/footer') %>
+  <!-- <table>
+    <thead>
+      <tr>
+        <th>Daily</th>
+        <th>Todos</th>
+      </tr>
+    </thead>
+  
+  <tbody>
+    <% games.forEach(function(g) { %>
+     <td><% %></td> 
+     <td><% %></td>
+        
+      </tr>
+      <% }); %>
+    </tbody>
+  </table> -->
